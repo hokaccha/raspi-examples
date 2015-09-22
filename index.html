@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ltica</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
+<style>
+body { text-align: center }
+i:before { font-size: 400px }
+i.active { color: red }
+</style>
+</head>
+<body>
+<label>
+<i class="fa fa-lightbulb-o"></i>
+<label>
+<script>
+var $led = $('i');
+$.get('/led', function(res) {
+  if (res.status === 'on') {
+    $led.addClass('active');
+  }
+});
+
+$led.on('click', function() {
+  $led.toggleClass('active');
+  $.post('/led', { status: $led.hasClass('active') ? 'on' : 'off' });
+});
+</script>
+</body>
+</html>

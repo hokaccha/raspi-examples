@@ -6,11 +6,12 @@ var app = express();
 var gpioDir = '/sys/class/gpio/gpio' + pin;
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static('public'));
 
-if (!fs.existsSync(gpioDir)) {
-  fs.writeFileSync('/sys/class/gpio/export', pin);
-  fs.writeFileSync(gpioDir + '/direction', 'out');
-}
+// if (!fs.existsSync(gpioDir)) {
+//   fs.writeFileSync('/sys/class/gpio/export', pin);
+//   fs.writeFileSync(gpioDir + '/direction', 'out');
+// }
 
 function getValue() {
   var val = fs.readFileSync(gpioDir + '/value').trim();
@@ -31,4 +32,6 @@ app.post('/led', function(req, res) {
   res.send(200);
 });
 
-app.listen(4567);
+app.listen(4567, function() {
+  console.log('listen to: http://localhost:' + this.address().port);
+});

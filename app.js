@@ -14,7 +14,7 @@ app.use(express.static('public'));
 // }
 
 function getValue() {
-  var val = fs.readFileSync(gpioDir + '/value').trim();
+  var val = fs.readFileSync(gpioDir + '/value').toString().trim();
   return val === '0' ? 'off' : 'on';
 }
 
@@ -29,7 +29,7 @@ app.get('/led', function(req, res) {
 
 app.post('/led', function(req, res) {
   setValue(req.body.status);
-  res.send(200);
+  res.sendStatus(200)
 });
 
 app.listen(4567, function() {

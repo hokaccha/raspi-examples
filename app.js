@@ -8,10 +8,10 @@ var gpioDir = '/sys/class/gpio/gpio' + pin;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'));
 
-// if (!fs.existsSync(gpioDir)) {
-//   fs.writeFileSync('/sys/class/gpio/export', pin);
-//   fs.writeFileSync(gpioDir + '/direction', 'out');
-// }
+if (!fs.existsSync(gpioDir)) {
+  fs.writeFileSync('/sys/class/gpio/export', pin);
+  fs.writeFileSync(gpioDir + '/direction', 'out');
+}
 
 function getValue() {
   var val = fs.readFileSync(gpioDir + '/value').toString().trim();

@@ -29,7 +29,7 @@ app.get('/led', function(req, res) {
 
 app.post('/led', function(req, res) {
   setValue(req.body.status);
-  res.sendStatus(200)
+  res.sendStatus(200);
 });
 
 app.listen(4567, function() {

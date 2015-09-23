@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Switch</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<style>
+body { text-align: center; padding-top: 80px; }
+i { -webkit-tap-highlight-color: rgba(0,0,0,0); }
+i:before { font-size: 250px }
+i.active {
+  color: #FFE512;
+  -webkit-transform: scale(2);
+  -webkit-transition: -webkit-transform 3s;
+}
+</style>
+</head>
+<body>
+<label>
+<i class="fa fa-bolt"></i>
+<label>
+<script>
+var socket = io();
+
+socket.on('on', function() {
+  $('i').addClass('active');
+});
+
+socket.on('off', function() {
+  $('i').removeClass('active');
+});
+</script>
+</body>
+</html>
